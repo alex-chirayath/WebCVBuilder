@@ -1,0 +1,275 @@
+
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="../static/css/bootstrap.css" rel="stylesheet" >
+<link href="../static/css/resume.css" rel="stylesheet" >
+<link href="../static/css/bootstrap-theme.css" rel="stylesheet" >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>  Web CV Builder</title>
+
+
+
+  </head>
+<body class="body-black">
+    <div class="container">
+
+      <div class="container" style="background-color: #F57C00;opacity: 30%">
+
+       <form class="form" action="create_portfolio" id="portfolio_form" method="POST">
+          <div class="col-md-12 jumbotron"><h1 style="text-align: center;">  Web CV Builder</h1>
+          <div class="col-md-12 jumbotron"><p>Hey there! Want an online web version of your resume? Go on and fill your details and we will send you the files to you by email!</p>
+          <p><i>The website is currently in Beta version and we are cosntantly trying to improve the system!</i></p></div></div>
+
+          <div class="col-md-12 jumbotron"><h2>Personal Details</h2>
+          <div class="row">
+          <div class="form-group col-md-4">
+            <label for="fname">First Name*:</label>
+            <input type="text" class="form-control" id="fname" name="fname" required="" pattern="(.*[a-zA-z].*)">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="mname">Middle Name:</label>
+            <input type="text" class="form-control" name="mname">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="lname">Last Name*:</label>
+            <input type="text" class="form-control" name="lname">
+          </div>
+          </div>
+          <div class="row">
+          <div class="form-group col-md-6">
+            <label for="linkedin">LinkedIn Profile URL:</label>
+            <input type="url" class="form-control" name="linkedin">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="email">Email address*:</label>
+            <input type="email" class="form-control" name="email" required="">
+          </div>
+          </div>
+          <div class="form-group col-md-12">
+            <label for="tag">Tagline:</label>
+            <input type="text" class="form-control" name="tag">
+          </div>
+
+          <div class =" form-group col-md-12">  <label>Summary :</label>
+          <textarea rows=8 class="form-control ckeditor" id="editor1" name="summary" value=" "></textarea></div>
+
+
+          </div>
+          <div class="col-md-12 jumbotron"><h2>Education</h2>
+          <div class="edu">
+            <button class="add_edu btn btn-primary">Add Education &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+          </div>
+          </div>
+          <div class="col-md-12 jumbotron"><h2>Work Experience</h2>
+          <div class="work">
+            <button class="add_work btn btn-primary">Add Work Experience &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+          </div>
+          </div>
+          <div class="col-md-12 jumbotron"><h2>Projects</h2>
+          <div class="proj">
+            <button class="add_proj btn btn-primary">Add Project &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+          </div>
+          </div>
+          <!--<div class="col-md-12 jumbotron"><h2>Skills:</h2>
+
+          <div class="form-group col-md-12">
+            <label for="skills">Skills*:</label> Separate skills by  ','
+            <input type="text" class="form-control" name="skills" >
+          </div>
+          </div>-->
+          <div class="col-md-12 jumbotron"><h2>Awards/Certifcations:</h2>
+          <div class="cert">
+            <button class="add_cert btn btn-primary">Add Award/Certification &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+          </div>
+          </div>
+
+
+          <!--<br>
+          <div class="col-md-12 jumbotron"><h2>Extra Curriculars:</h2>
+          <div class="curr">
+            <button class="add_curr btn btn-primary">Add Extra Curriculars &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+          </div>
+          </div>-->
+          <br>
+
+          <button type="submit" class="btn btn-success btn-lg col-md-12">Submit</button>
+      </form>
+      </div>
+    </div>
+      <!-- Footer -->
+      <footer style="margin-top: 20px;bottom:0;">
+      <div class="jumbotron row">
+        <p class=" col-md-4 text-left " style="padding:10px; font-size:14px"> WRB is protected under  <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+        </p>
+        <p class=" col-md-4 text-center" style="padding:10px; font-size:14px"> Got any feedback?   <a href="https://docs.google.com/forms/d/1unxBU-9MXHHnWZNAdSv8a-bQZTKq7ZJCORewnqyIiKw/edit">Click HERE!</a>
+        </p>
+
+        <p class=" text-right  col-md-4" style="padding:10px; font-size:14px"> Developers: <a href="https://www.linkedin.com/in/alex-anto-chirayath/">Alex Chirayath</a> and <a href="https://www.linkedin.com/in/mrudula-deore/">Mrudula Deore</a>
+        </p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+
+
+
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+
+<script>
+$(document).ready(function() {
+    var max_fields      = 5;
+    var wrapper         = $(".edu");
+    var add_button      = $(".add_edu");
+
+    var x = 1;
+    $(add_button).click(function(e){
+        e.preventDefault();
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+              '<div><div class ="form-group col-md-12">  <label >University Name*:</label><input type="text" class="form-control"  name="edu_name[]" required pattern="(.*[a-zA-z].*)"></div><div class="row"><div class="col-md-4"><label >Degree Major:</label><input type="text" class="form-control"  name="edu_major[]" required pattern="(.*[a-zA-z].*)"></div><div class="col-md-4"><label >Graduation Date:</label><input type="date" min="1902-02-02" id="date-picker" class="form-control"  name="edu_date[]" value=" "></div><div class="col-md-4"><label >GPA:</label><input type="text" class="form-control" name="edu_gpa[]" value=""></div></div><div class ="col-md-12">  <label>Description :</label><textarea  rows=6 class="form-control ckeditor" id="edueditor'+String(x)+'"name="edu_desc[]" value=" "></textarea></div><a href="#" class="delete btn btn-danger">Delete</a></div>');
+        }
+  else
+  {
+  alert('You have reached the max no of entries')
+  }
+  CKEDITOR.replace( 'edueditor'+String(x) );
+    });
+
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+
+$(document).ready(function() {
+    var max_fields      = 5;
+    var wrapper         = $(".work");
+    var add_button      = $(".add_work");
+
+    var x = 1;
+    $(add_button).click(function(e){
+        e.preventDefault();
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+              '<div><div class ="form-group col-md-12">  <label>Organization* :</label><input type="text" class="form-control" name="work_name[]" required pattern="(.*[a-zA-z].*)"></div><div class="row"><div class="col-md-6"><label >Position*:</label><input type="text" class="form-control" name="work_pos[]" required pattern="(.*[a-zA-z].*)"></div><div class="col-md-3"><label >Start Date:</label><input type="date" min="1902-02-02" id="date-picker" class="form-control" name="work_sdate[]"></div><div class="col-md-3"><label >End Date:</label><input type="date" min="1902-02-02" id="date-picker" class="form-control" name="work_edate[]"></div></div><div class ="col-md-12">  <label>Description :</label><textarea rows=6 class="form-control ckeditor" id="workeditor'+String(x)+'" name="work_desc[]"></textarea></div><a href="#" class="delete btn btn-danger">Delete</a></div>');
+        }
+  else
+  {
+  alert('You have reached the max no of entries')
+  }
+
+  CKEDITOR.replace( 'workeditor'+String(x) );
+
+    });
+
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+
+$(document).ready(function() {
+    var max_fields      = 10;
+    var wrapper         = $(".proj");
+    var add_button      = $(".add_proj");
+
+    var x = 1;
+    $(add_button).click(function(e){
+        e.preventDefault();
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+              '<div><div class ="form-group col-md-12">  <label>Project Title* :</label><input type="text" class="form-control" name="proj_name[]" required pattern="(.*[a-zA-z0-9].*)"></div><div class="row"><div class="col-md-6"><label >Project URL:</label><input type="url" class="form-control" name="proj_url[]" value=" "></div><div class="col-md-3"><label >Start Date:</label><input type="date" min="1902-02-02" class="form-control" name="proj_sdate[]" value=" "></div><div class="col-md-3"><label >End Date:</label><input type="date" min="1902-02-02" class="form-control" name="proj_edate[]" value=" "></div></div><div class ="col-md-12">  <label>Description :</label><textarea rows=6 class="form-control ckeditor" id="projeditor'+String(x)+'" name="proj_desc[]" value=" "></textarea></div><a href="#" class=" delete btn btn-danger">Delete</a></div>');
+        }
+  else
+  {
+  alert('You have reached the max no of entries')
+  }
+
+  CKEDITOR.replace( 'projeditor'+String(x) );
+
+  });
+
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+
+$(document).ready(function() {
+    var max_fields      = 20;
+    var wrapper         = $(".cert");
+    var add_button      = $(".add_cert");
+
+    var x = 1;
+    $(add_button).click(function(e){
+        e.preventDefault();
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+              '<div class="row" ><div class ="form-group col-md-6">  <label>Name* :</label><input type="text" class="form-control" name="cert_name[]" required pattern="(.*[a-zA-z0-9].*)"></div><div class="col-md-6"><label >URL:</label><input type="url" class="form-control" name="cert_url[]"></div> <a href="#" class="delete btn btn-danger">Delete</a></div>');
+        }
+  else
+  {
+  alert('You have reached the max no of entries')
+  }
+    });
+
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+
+$(document).ready(function() {
+    var max_fields      = 20;
+    var wrapper         = $(".curr");
+    var add_button      = $(".add_curr");
+
+    var x = 1;
+    $(add_button).click(function(e){
+        e.preventDefault();
+        if(x < max_fields){
+            x++;
+            $(wrapper).append(
+              '<div ><div class ="form-group col-md-6">  <label>Name* :</label><input type="text" class="form-control" name="curr_name[]" required pattern="(.*[a-zA-z].*)"></div><div class="col-md-6"><label >URL:</label><input type="url" class="form-control" name="curr_url[]"></div> <a href="#" class="delete btn btn-danger">Delete</a></div>');
+        }
+  else
+  {
+  alert('You have reached the max no of entries')
+  }
+    }
+
+
+    );
+
+    $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+
+</script>
+<script>
+  CKEDITOR.replace( 'editor1' );
+
+  function validate_text(who) {
+    if (who.value.trim()=="") {
+      alert("Enter a valid entry !");
+      this.value = '';
+    }
+  }
+</script>
+
+
+
+
+</body>
+
+
+</html>
