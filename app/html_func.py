@@ -30,14 +30,14 @@ def create_edetails_dict(edu_name,edu_major,edu_date,edu_gpa,edu_desc):
 	edetails['edu_gpa']=edu_gpa
 	edetails['edu_desc']=edu_desc
 	return edetails
-	
+
 
 def create_wdetails_dict(work_name,work_pos,work_sdate,work_edate,work_desc):
 	wdetails={}
 	wdetails['work_name']=work_name
 	wdetails['work_pos']=work_pos
 	wdetails['work_edate']=work_edate
-	
+
 	wdetails['work_sdate']=work_sdate
 	wdetails['work_desc']=work_desc
 	return wdetails
@@ -47,12 +47,12 @@ def create_prdetails_dict(proj_name,proj_url,proj_sdate,proj_edate,proj_desc):
 	prdetails['proj_name']=proj_name
 	prdetails['proj_url']=proj_url
 	prdetails['proj_edate']=proj_edate
-	
+
 	prdetails['proj_sdate']=proj_sdate
-	
+
 	prdetails['proj_desc']=proj_desc
 
-	
+
 	return prdetails
 
 def create_cdetails_dict(name_list,url_list):
@@ -90,7 +90,7 @@ def generate_section_end():
 	return '</div></div></div></section>'
 
 def generate_work_div(inst_name,inst_det,sdate,edate,desc):
-	s='<div><div class="row"><div class="col-md-9"><h4><u>' + str(inst_det)+'-'+str(inst_name) +'</u></h4></div>' 
+	s='<div><div class="row"><div class="col-md-9"><h5><u>' + str(inst_det)+'-'+str(inst_name) +'</u></h5></div>'
 	sdate=convert_date_format(sdate)
 	edate=convert_date_format(edate)
 	s+='<div class="col-md-3">'
@@ -111,16 +111,16 @@ def generate_work_div(inst_name,inst_det,sdate,edate,desc):
 def generate_proj_div(proj_name,proj_url,proj_sdate,proj_edate,proj_desc):
 	proj_sdate=convert_date_format(proj_sdate)
 	proj_edate=convert_date_format(proj_edate)
-	
+
 	l1=""
 	l2=""
 	if proj_url.strip()!="":
 		l1='<a href="'+proj_url+'">'
 		l2='</a>'
-	
-	s='<div><div class="row"><div class="col-md-9"><h4><u>'+l1 + str(proj_name) +l2+ '</u></h4></div>' 
+
+	s='<div><div class="row"><div class="col-md-9"><h5><u>'+l1 + str(proj_name) +l2+ '</u></h5></div>'
 	s+='<div class="col-md-3">'
-	
+
 	if (proj_sdate.strip())!='':
 		s+='<p class="workedu-date"><b>' + str(proj_sdate) +'</b>'
 		if (proj_edate.strip())=='':
@@ -139,17 +139,17 @@ def generate_cert_div(cert_name,cert_url):
 	if cert_url.strip()!="":
 		l1='<a href="'+cert_url+'">'
 		l2='</a>'
-	s='<div><p><u>'+l1 + str(cert_name) +l2+'</u></p>' 
+	s='<div><h5><u>'+l1 + str(cert_name) +l2+'</u></h5>'
 
 	s+='</div><br><br>'
 	return s
 
 
 def generate_edu_div(inst_name,inst_det,edate,desc,gpa):
-	s='<div><div class="row"><div class="col-md-9"><h4><u>' + str(inst_name) +'</u></h4></div>' 
+	s='<div><div class="row"><div class="col-md-9"><h5><u>' + str(inst_name) +'</u></h5></div>'
 	s+='<div class="col-md-3">'
 	edate=convert_date_format(edate)
-	
+
 	if (edate.strip())!='':
 		s+='<p class="workedu-date"><b>' + str(edate)+'</b></p>'
 	s+='</div>'
@@ -160,26 +160,25 @@ def generate_edu_div(inst_name,inst_det,edate,desc,gpa):
 		s+="<b>GPA:"+str(gpa)+'</b>'
 	s+='</p></div></div>'
 
-	
-	
+
+
 	if (desc.strip())!='':
 		s+='<p class="workedu-desc lead">' + str(desc)+'</p>'
 	s+='</div><br><br>'
 	return s
-            
+
 
 def generate_sections(personal_details,education_details,work_details,proj_details,cert_details,flag_dict):
-	print "Calling generate sections..."
-	
+
 	counter=0
 	s=''
 	a,counter=generate_section_intro (counter)
 	b='><div class="container"><div class="row"><div class="col-lg-8 mx-auto"><h2>'
 	c='</h2><br><br>'
-	
+
 	#Personal details
 	pdetails =a + '"about"'+b+'About Me'+c
-	pdetails+='<p class="lead">'+ personal_details['summary'] +'</p>' 
+	pdetails+='<p class="lead">'+ personal_details['summary'] +'</p>'
 	pdetails+= generate_section_end()
 	s+=pdetails
 
@@ -201,7 +200,7 @@ def generate_sections(personal_details,education_details,work_details,proj_detai
 		wdetails+=generate_section_end()
 		s+=wdetails
 
-	
+
 
 	if flag_dict['proj']==1:
 		a,counter=generate_section_intro (counter)
@@ -211,7 +210,7 @@ def generate_sections(personal_details,education_details,work_details,proj_detai
 		prdetails+=generate_section_end()
 
 		s+=prdetails
-	
+
 
 	if flag_dict['cert']==1:
 		a,counter=generate_section_intro (counter)
@@ -249,8 +248,7 @@ def generate_navbar_string(flag_dict,personal_details):
 def generate_footer_string():
 	s=' <footer style="margin-top: 10px;bottom:0;" ><div class="row" style="background-color:#F57C00;padding:20px;">' \
         '<p class=" col-md-4 text-left " style="padding:10px; "> WRB is protected under  <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a></p>'\
-        '<p class=" col-md-4 text-center" style="padding:10px; "> Got any feedback?   <a href="https://docs.google.com/forms/d/1unxBU-9MXHHnWZNAdSv8a-bQZTKq7ZJCORewnqyIiKw/edit">Click HERE!</a></p>'\
-		'<p class=" text-right  col-md-4" style="padding:10px; "> Developers: <a href="https://www.linkedin.com/in/alex-anto-chirayath/">Alex Chirayath</a> and <a href="https://www.linkedin.com/in/mrudula-deore/">Mrudula Deore</a></p>'\
+        '<p class=" text-right  col-md-4" style="padding:10px; "> Developers: <a href="https://www.linkedin.com/in/alex-anto-chirayath/">Alex Chirayath</a> and <a href="https://www.linkedin.com/in/mrudula-deore/">Mrudula Deore</a></p>'\
         '</div></footer> <script src="js/jquery.min.js"></script><script src="js/bootstrap.bundle.min.js">'\
 		'</script><script src="js/jquery.easing.min.js"></script><script src="js/nav-scroll.js"></script></body></html>'
 	return s
