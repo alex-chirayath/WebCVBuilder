@@ -5,8 +5,8 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 def send_email(filename,email):
-    email_user = 'webcvbuilder@gmail.com'
-    email_password = 'webRoot123$'
+    email_user = 'dummy_email'
+    email_password = 'dummy_pass'
     email_send = email
 
     subject = 'Your Protfolio Webpage is Here!'
